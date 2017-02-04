@@ -6,6 +6,7 @@ Jello.factory('boardService', ['Restangular',
     var all = function() {
       return Restangular.all('boards').getList()
         .then(function(boards) {
+          console.log('done getting all')
           _boards = boards;
           return _boards;
         });
@@ -25,6 +26,14 @@ Jello.factory('boardService', ['Restangular',
           return board
         })
     }
+
+    Restangular.extendModel('boards', function(board) {
+      board.destroy = function() {
+        Restangular.one('board', this.id).remove()
+          .then(all)
+        return this
+      }
+    })
 
     return {
       all: all,

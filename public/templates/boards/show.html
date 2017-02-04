@@ -4,7 +4,7 @@
 <select ng-change="changeBoard()" ng-model="boardId">
   <option ng-repeat="board in boards" ng-value="board.id">{{board.title}}</option>
 </select>
-<a>Delete Board</a> <a ui-sref="new({lastId: currentBoard.id})">Create Board</a>
+<a href="#" ng-click="deleteBoard()">Delete Board</a> <a ui-sref="new({lastId: currentBoard.id})">Create Board</a>
 
   <div class="row">
     <div class="col-xs-8">

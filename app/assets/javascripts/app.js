@@ -43,7 +43,7 @@ Jello.config(
   ['$stateProvider', '$urlRouterProvider',
   
   function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/board/new')
+    $urlRouterProvider.otherwise('/boards/new')
 
 
     $stateProvider
@@ -51,7 +51,7 @@ Jello.config(
         url: "boards/new",
         params: {lastId: ""},
         views: {
-          '@': {
+          '': {
             templateUrl: "/templates/boards/new.html", 
             controller: "BoardCreateCtrl"
           }
@@ -61,11 +61,10 @@ Jello.config(
         url: '/boards/show/:id',
         resolve: {
           "boards": ["boardService", function(boardService){
-            console.log("running")
+            console.log('resolving')
             return boardService.all() 
           }],
           "board": ["boardService", "$stateParams", function(boardService, $stateParams) {
-            console.log("from the law")
             return boardService.find($stateParams.id)
           }]
         },

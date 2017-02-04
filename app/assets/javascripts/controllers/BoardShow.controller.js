@@ -8,4 +8,9 @@ Jello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'boards',
     $scope.changeBoard = function(){
       $state.go("boards", {id: $scope.boardId}, {reload: true})
     }
+
+    $scope.deleteBoard = function() {
+      board.destroy()
+        .then($state.go('boards'))
+    }
   }])
