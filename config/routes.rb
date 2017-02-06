@@ -5,8 +5,8 @@ Rails.application.routes.draw do
   scope :api do 
     scope :v1 do 
       resources :boards, except: [:new, :edit]
-      resources :lists, only: [:create]
-      resources :cards, only: [:create]
+      resources :lists, only: [:create, :update]
+      resources :cards, only: [:create, :update]
     end
   end
 end

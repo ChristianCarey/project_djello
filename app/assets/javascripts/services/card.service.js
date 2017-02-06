@@ -8,7 +8,13 @@ Djello.factory('cardService', ['Restangular', '$rootScope',
         })
     }
 
+    var update = function(params) {
+      var card = Restangular.restangularizeElement(null, params, 'cards')
+      return card.put()
+    }
+
     return {
-      create: create
+      create: create,
+      update: update
     }
   }]);

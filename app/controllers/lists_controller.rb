@@ -10,9 +10,18 @@ class ListsController < ApplicationController
     end
   end
 
+    def update
+    @list = List.find_by(id: params[:id])
+    if @list.update(list_params)
+      render json: @list.to_json(include: :cards)
+    else 
+      render json: @list.errors.full_messages, status: 422
+    end
+  end
+
   private
 
   def list_params
-    params.require(:list).permit(:board_id, :title)
+    params.require(:list).permit(:id, :board_id, :title)
   end
 end

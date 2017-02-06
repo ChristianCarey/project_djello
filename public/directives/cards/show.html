@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-header">
+    <h3>
+      <span ng-click="edit('title')" ng-hide="editing.title">
+        {{ card.title }} 
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </span>
+      <span ng-show="editing.title">
+        <input id="edit-card-title" type="text" ng-model="card.title" class="form-control" ng-blur="updateCard()">
+      </span>
+    </h3>
+    <p>In list {{ card.listTitle }}</p>
+  </div>
+  <div class="card-description">
+    <p>
+      <span ng-click="edit('description')" ng-hide="editing.description">{{card.description}} <i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+        <textarea id="edit-card-description" class="form-control" ng-show="editing.description" ng-blur="updateCard()" ng-model="card.description">
+      </textarea>
+    </p>
+  </div>
+</div>

@@ -1,7 +1,16 @@
-<div class="list panel panel-default" ng-repeat="list in board.lists">
+<div class="list panel panel-default" ng-repeat="list in board.lists" ng-controller="ListShowCtrl">
   <div class="panel-heading">
-    <h5>{{ list.title }}</h5>
-    <p>{{ list.description }}</p>
+    <h5>
+      <span ng-click="edit('title')" ng-hide="editing.title">
+        {{ list.title }}
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </span>
+      <span ng-show="editing.title">
+        <form ng-submit="updateList()">
+          <input id="edit-list-title" type="text" ng-model="list.title" class="form-control" ng-blur="updateList()">
+        </form>
+      </span>
+    </h5>
   </div>
   <div class="panel-body">
     <card-index list="list" board="board"></card-index>

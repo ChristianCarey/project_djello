@@ -9,7 +9,13 @@ Djello.service('listService', ['Restangular', '$rootScope',
         })
     }
 
+    var update = function(params) {
+      var list = Restangular.restangularizeElement(null, params, 'lists');
+      return list.put()
+    }
+
     return {
-      create: create
+      create: create,
+      update: update
     }
   }]);
