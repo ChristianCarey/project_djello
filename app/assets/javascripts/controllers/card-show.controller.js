@@ -1,5 +1,6 @@
-Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeout',
-  function($scope, $uibModal, cardService, $timeout) {
+
+Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeout', '$rootScope',
+  function($scope, $uibModal, cardService, $timeout, $rootScope) {
 
     var _focus = function(id) {
       $timeout(function() {
@@ -29,6 +30,37 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
     $scope.edit = function(attribute) {
       $scope.editing[attribute] = true;
       _focus('edit-card-' + attribute);
+    }
+
+    $scope.handleDrop = function(staticCardId, droppedCardId, originalListId) {
+      console.log(droppedCardId)
+      var staticCard;
+      var droppedCard = {
+        id: droppedCardId,
+        list_id: $scope.list.id
+      };
+
+      if (staticCardId !== -1) {
+        for (var i = 0; i < $scope.list.cards.length; i++) {
+          var card = $scope.list.cards[i]
+          if (card.id == staticCardId) {
+            staticCard = card;
+            break;
+          }
+        }
+      } else {
+        staticCard = {
+          position: -1
+        }
+      }
+      droppedCard.new_position = staticCard.position + 1;
+      cardService.update(droppedCard)
+        .then(function(card) {
+          $rootScope.$broadcast('dropCard', {
+            card: card,
+            originalListId: originalListId
+          })
+        });
     }
 
     _resetEditing();

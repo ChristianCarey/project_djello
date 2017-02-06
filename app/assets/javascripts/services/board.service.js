@@ -27,6 +27,11 @@ Djello.factory('boardService', ['Restangular', '$rootScope', 'listService', 'car
         })
     }
 
+    var update = function(params) {
+      var board = Restangular.restangularizeElement(null, params, 'boards')
+      return board.put()
+    }
+
     var _broadcast = function() {
       $rootScope.$broadcast('updateBoards', _boards)
     }
@@ -54,6 +59,7 @@ Djello.factory('boardService', ['Restangular', '$rootScope', 'listService', 'car
     return {
       all: all,
       find: find,
-      create: create
+      create: create,
+      update: update
     }
   }])

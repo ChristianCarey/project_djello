@@ -1,4 +1,14 @@
 class ListsController < ApplicationController
+
+  def show
+    @list = List.find_by(id: params[:id])
+    if @list 
+      render json: @list.to_json(include: :cards)
+    else 
+      render json: "No list found.", status: 404
+    end
+  end
+
   def create
     board = current_user.boards.find_by(id: params[:board_id])
     @list = board.lists.build(list_params)
@@ -10,7 +20,7 @@ class ListsController < ApplicationController
     end
   end
 
-    def update
+  def update
     @list = List.find_by(id: params[:id])
     if @list.update(list_params)
       render json: @list.to_json(include: :cards)

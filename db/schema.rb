@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206012057) do
+ActiveRecord::Schema.define(version: 20170206211804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,10 +60,11 @@ ActiveRecord::Schema.define(version: 20170206012057) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.integer  "list_id"
     t.integer  "position"
+    t.integer  "new_position"
     t.index ["list_id"], name: "index_cards_on_list_id", using: :btree
     t.index ["user_id"], name: "index_cards_on_user_id", using: :btree
   end

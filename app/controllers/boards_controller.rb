@@ -2,8 +2,6 @@ class BoardsController < ApplicationController
   def index
     @boards = current_user.boards
     respond_to do |format|
-      puts "JSON"
-      puts @boards.to_json
       format.json { render json: @boards }
     end
   end
@@ -29,6 +27,15 @@ class BoardsController < ApplicationController
     end
   end
 
+   def update
+    @board = Board.find_by(id: params[:id])
+    if @board.update(board_params)
+      render json: :show
+    else 
+      render json: @board.errors.full_messages, status: 422
+    end
+  end
+
   def destroy
     @board = current_user.boards.find_by(id: params[:id])
     if @board
@@ -45,6 +52,6 @@ class BoardsController < ApplicationController
   private
 
   def board_params
-    params.require(:board).permit(:title, :description)
+    params.require(:board).permit(:id, :title, :description)
   end
 end

@@ -1,12 +1,18 @@
 <div class="container">
   <div class="board-header">
-    <h3> {{board.title }}</h3> 
-
+    <h3>
+      <span ng-click="edit('title')" ng-hide="editing.title">
+        {{ board.title }}
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+      </span>
+      <span ng-show="editing.title">
+        <form ng-submit="updateBoard()">
+          <input id="edit-board-title" type="text" ng-model="board.title" class="form-control" ng-blur="updateBoard()">
+        </form>
+      </span>
+    </h3> 
     <a href="#" ng-click="deleteBoard()">
       Delete Board
-    </a>
-    <a ui-sref="new({lastId: board.id})">
-      Create Board
     </a>
   </div>
 

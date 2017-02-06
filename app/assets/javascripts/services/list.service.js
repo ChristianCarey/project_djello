@@ -14,8 +14,13 @@ Djello.service('listService', ['Restangular', '$rootScope',
       return list.put()
     }
 
+    var find = function(id) {
+      return Restangular.one('lists', id).get()
+    }
+
     return {
       create: create,
-      update: update
+      update: update,
+      find: find
     }
   }]);
