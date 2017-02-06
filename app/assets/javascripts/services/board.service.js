@@ -1,12 +1,11 @@
-Jello.factory('boardService', ['Restangular', 
-  function(Restangular) {
+Djello.factory('boardService', ['Restangular', '$rootScope', 'listService', 'cardService', 
+  function(Restangular, $rootScope, listService, cardService) {
     
     var _boards;
 
     var all = function() {
       return Restangular.all('boards').getList()
         .then(function(boards) {
-          console.log('done getting all')
           _boards = boards;
           return _boards;
         });
@@ -19,20 +18,37 @@ Jello.factory('boardService', ['Restangular',
         })
     }
 
-    var create = function(title) {
-      return Restangular.all('boards').post({board: { title: title}})
+    var create = function(params) {
+      return Restangular.all('boards').post(params)
         .then(function(board) {
-          _boards.unshift(board);
+          _boards.push(board);
+          _broadcast()
           return board
         })
     }
 
+    var _broadcast = function() {
+      $rootScope.$broadcast('updateBoards', _boards)
+    }
+
     Restangular.extendModel('boards', function(board) {
       board.destroy = function() {
-        Restangular.one('board', this.id).remove()
-          .then(all)
-        return this
+        return Restangular.one('boards', this.id).remove()
+          .then(function(board) {
+            all().then(_broadcast);
+            return board
+          })
       }
+
+      board.createList = function(params) {
+        return listService.create(params);
+      }
+
+      board.createCard = function(params) {
+        return cardService.create(params)
+      }
+
+      return board
     })
 
     return {

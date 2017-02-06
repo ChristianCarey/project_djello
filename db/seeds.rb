@@ -21,7 +21,7 @@ puts "Creating Boards"
     description: Faker::StarWars.quote,
     user_id: User.first.id
   )
-  User.first.shared_boards << board
+  User.first.boards << board
 end
 
 puts "5 boards created"
@@ -30,11 +30,12 @@ puts "adding lists to boards"
 
 Board.all.each do |board|
 
-  4.times do 
+  4.times do |n|
     board.lists.create(
       user_id: user.id,
       title: Faker::Pokemon.location,
-      description: Faker::ChuckNorris.fact
+      description: Faker::ChuckNorris.fact,
+      position: n
     )
   end
 end
@@ -45,12 +46,12 @@ puts "adding cards to lists"
 
 List.all.each do |list| 
 
-  4.times do
+  4.times do |n|
     list.cards.create(
       user_id: user.id,
       title: Faker::StarWars.vehicle,
-      description: Faker::Lorem.sentence,
-      priority: 1
+      description: Faker::ChuckNorris.fact,
+      position: n
     )
   end
 end

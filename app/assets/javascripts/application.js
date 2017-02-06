@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require angular
+//= require ui-bootstrap.min.js
 //= require lodash
 //= require angular-devise
 //= require restangular

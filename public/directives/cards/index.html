@@ -1,0 +1,9 @@
+<div class="well" ng-repeat="card in list.cards">
+  <p>{{ card.title }}</p>
+  <p>{{ card.description }}</p>
+</div>
+<div class="well" ng-controller="CardCreateCtrl">
+  <form name="newCardForm" ng-Submit="createCard()">
+    <input ng-model="newCard.title" type="text" class="form-control" placeholder="Add a card...">
+  </form>
+</div>

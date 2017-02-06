@@ -1,11 +1,11 @@
-Jello.controller('BoardCreateCtrl', ['$scope', "boardService", "$stateParams", '$state',
-  function($scope, boardService, $stateParams, $state) {
+Djello.controller('BoardCreateCtrl', ['$scope', 'boardService', '$state',
+  function($scope, boardService, $state) {
     $scope.createBoard = function(){
-      boardService.create($scope.title)
+      boardService.create($scope.newBoard)
         .then(function(board) {
-          $state.go('boards', { id: board.id })
+          $scope.newBoard = {};
+          $scope.createBoardForm.$setPristine;
+          $state.go('showBoard', { id: board.id })
         })
     }
-    console.log($stateParams)
-    $scope.lastId = $stateParams.lastId
   }]);

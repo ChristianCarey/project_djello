@@ -1,17 +1,21 @@
 <div class="container">
-<h3> {{currentBoard.title }}</h3> 
+  <div class="board-header">
+    <h3> {{board.title }}</h3> 
 
-<select ng-change="changeBoard()" ng-model="boardId">
-  <option ng-repeat="board in boards" ng-value="board.id">{{board.title}}</option>
-</select>
-<a href="#" ng-click="deleteBoard()">Delete Board</a> <a ui-sref="new({lastId: currentBoard.id})">Create Board</a>
+    <a href="#" ng-click="deleteBoard()">
+      Delete Board
+    </a>
+    <a ui-sref="new({lastId: board.id})">
+      Create Board
+    </a>
+  </div>
 
   <div class="row">
-    <div class="col-xs-8">
-      <div id="list-index" ui-view="list-index"></div>
+    <div class="col-xs-9">
+      <list-index id="list-index" board="board"></list-index>
     </div>
-    <div class="col-xs-4">
-      <div ui-view="activity-feed"></div>
+    <div class="col-xs-3">
+      <activity-feed trackable="board"></activity-feed>
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203165823) do
+ActiveRecord::Schema.define(version: 20170206012057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20170203165823) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "position"
     t.index ["user_id"], name: "index_boards_on_user_id", using: :btree
   end
 
@@ -55,7 +56,6 @@ ActiveRecord::Schema.define(version: 20170203165823) do
   end
 
   create_table "cards", force: :cascade do |t|
-    t.integer  "priority"
     t.boolean  "complete"
     t.string   "title"
     t.text     "description"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20170203165823) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "list_id"
+    t.integer  "position"
     t.index ["list_id"], name: "index_cards_on_list_id", using: :btree
     t.index ["user_id"], name: "index_cards_on_user_id", using: :btree
   end
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 20170203165823) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "position"
     t.index ["board_id"], name: "index_lists_on_board_id", using: :btree
     t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end

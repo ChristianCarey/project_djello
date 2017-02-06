@@ -1,8 +1,8 @@
-var Jello = angular.module('Jello', ['ui.router', 'restangular', 'Devise'])
+var Djello = angular.module('Djello', ['ui.router', 'restangular', 'Devise', 'ui.bootstrap'])
                    .constant('_', window._);
 
 // CSRF config
-Jello.config(
+Djello.config(
   [ '$httpProvider',
   function($httpProvider){
     var token = angular.element('meta[name=csrf-token]')
@@ -13,20 +13,20 @@ Jello.config(
       .common['X-CSRF-Token'] = token;
   }])
 
-// Devise config
-Jello.config(
-  ['AuthProvider',
+// // Devise config
+// Djello.config(
+//   ['AuthProvider',
 
-  function(AuthProvider) {
-    AuthProvider.loginPath('/users/sign_in.json');
-    AuthProvider.loginMethod('POST');
-    AuthProvider.resourceName('users');
-  }
+//   function(AuthProvider) {
+//     AuthProvider.loginPath('/users/sign_in.json');
+//     AuthProvider.loginMethod('POST');
+//     AuthProvider.resourceName('users');
+//   }
 
-]);
+// ]);
 
 // Restangular config
-Jello.config(
+Djello.config(
   ['RestangularProvider',
 
     function(RestangularProvider){
@@ -39,31 +39,36 @@ Jello.config(
 
 ]);
 
-Jello.config(
+Djello.config(
   ['$stateProvider', '$urlRouterProvider',
   
   function($stateProvider, $urlRouterProvider){
-    $urlRouterProvider.otherwise('/boards/new')
+    $urlRouterProvider.otherwise('/')
 
 
     $stateProvider
-      .state('new',{
-        url: "boards/new",
-        params: {lastId: ""},
+      .state('main', {
+        url: '',
         views: {
-          '': {
-            templateUrl: "/templates/boards/new.html", 
-            controller: "BoardCreateCtrl"
+          '' : {
+            templateUrl: '/templates/main.html'
           }
         }
-        })
-      .state('boards', {
-        url: '/boards/show/:id',
+      })
+      // .state('new',{
+      //   url: "boards/new",
+      //   params: {lastId: ""},
+      //   views: {
+      //     '': {
+      //       templateUrl: "/templates/boards/new.html", 
+      //       controller: "BoardCreateCtrl"
+      //     }
+      //   }
+      //   })
+      .state('showBoard', {
+        parent: 'main',
+        url: '/boards/:id',
         resolve: {
-          "boards": ["boardService", function(boardService){
-            console.log('resolving')
-            return boardService.all() 
-          }],
           "board": ["boardService", "$stateParams", function(boardService, $stateParams) {
             return boardService.find($stateParams.id)
           }]
@@ -72,15 +77,11 @@ Jello.config(
           '' : {
             templateUrl: '/templates/boards/show.html',
             controller: 'BoardShowCtrl',
-          },
-          'list-index@boards' : {
-            templateUrl: '/templates/lists/index.html',
-            controller: 'ListIndexCtrl'
-          },
-          'activity-feed@boards' : {
-            templateUrl: '/templates/boards/activity-feed.html',
-            controller: 'ListIndexCtrl'
           }
+          // 'activity-feed@boards' : {
+          //   templateUrl: '/templates/boards/activity-feed.html',
+          //   controller: 'ListIndexCtrl'
+          // }
         }
       })
   }])

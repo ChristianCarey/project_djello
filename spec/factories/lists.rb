@@ -3,6 +3,6 @@ FactoryGirl.define do
     user nil
     board nil
     title "MyString"
-    description "MyText"
+    position 1
   end
 end

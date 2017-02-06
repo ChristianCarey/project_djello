@@ -1,0 +1,7 @@
+<ui-view>
+  <h2>Get started by adding a board.</h2>
+  <form name="createBoardForm" class="form-inline" ng-submit="createBoard()" ng-controller="BoardCreateCtrl">
+    <input class="form-control mb-2 mr-sm-2 mb-sm-0" type="text" ng-model="newBoard.title" placeholder="Title">
+    <button type="submit" class="btn btn-success">Create</button>
+  </form>
+</ui-view>

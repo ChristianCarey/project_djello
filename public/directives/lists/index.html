@@ -1,0 +1,21 @@
+<div class="list panel panel-default" ng-repeat="list in board.lists">
+  <div class="panel-heading">
+    <h5>{{ list.title }}</h5>
+    <p>{{ list.description }}</p>
+  </div>
+  <div class="panel-body">
+    <card-index list="list" board="board"></card-index>
+  </div>
+  <div class="panel-footer">
+  </div>
+</div>
+<div class="panel panel-default new-list-container" ng-controller="ListCreateCtrl">
+  <div class="panel-body">
+    <form name="newListForm" ng-submit="createList()">
+      <div class="form-group">
+        <input ng-model="newList.title" type="text" name="title" class="form-control new-list-input" placeholder="Add a list...">
+      </div>
+    <input type="submit" class="btn btn-success" value="Create">
+    </form>
+  </div>
+</div>

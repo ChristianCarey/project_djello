@@ -1,7 +1,11 @@
 class BoardsController < ApplicationController
   def index
-    @boards = current_user.shared_boards
-    render json: @boards
+    @boards = current_user.boards
+    respond_to do |format|
+      puts "JSON"
+      puts @boards.to_json
+      format.json { render json: @boards }
+    end
   end
 
   def show
@@ -18,12 +22,25 @@ class BoardsController < ApplicationController
   def create
     @board = current_user.owned_boards.build(board_params)
     if @board.save
-      current_user.shared_boards << @board
+      current_user.boards << @board
       render json: @board
     else
       render json: @board.errors.full_messages, status: 422
     end
   end
+
+  def destroy
+    @board = current_user.boards.find_by(id: params[:id])
+    if @board
+      @board.destroy
+      respond_to do |format|
+        format.json { render json: @board }
+      end
+    else
+      render json: "No board found", status: 404
+    end
+  end
+
 
   private
 
