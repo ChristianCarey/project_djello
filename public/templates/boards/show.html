@@ -11,9 +11,6 @@
         </form>
       </span>
     </h3> 
-    <a href="#" ng-click="deleteBoard()">
-      Delete Board
-    </a>
   </div>
 
   <div class="row">
@@ -21,7 +18,7 @@
       <list-index id="list-index" board="board"></list-index>
     </div>
     <div class="col-xs-3">
-      <activity-feed trackable="board"></activity-feed>
+      <board-menu board="board" ng-controller="BoardMenuCtrl"></board-menu>
     </div>
   </div>
 </div>

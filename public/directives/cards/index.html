@@ -1,11 +1,9 @@
 <div class="card-index"> 
-  cards in list: {{ list.cards.length }}
   <div droppable class="shadow-card" ng-controller="CardShowCtrl">
   </div>
   <div data-list-id="{{ card.listId }}" id="{{ 'card' + card.id }}" droppable draggable ng-controller="CardShowCtrl" ng-repeat="card in list.cards | orderBy : 'position'" ng-click="showCard()">
     <div class="well">
       <p>{{ card.title }}</p>
-      <p>id: {{ card.id }}</p>
     </div>
   </div>
 </div>

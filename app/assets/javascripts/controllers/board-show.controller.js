@@ -21,11 +21,6 @@ Djello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board',
       $state.go("boards", {id: $scope.boardId}, {reload: true})
     }
 
-    $scope.deleteBoard = function() {
-      board.destroy()
-        .then($state.go('main'))
-    }
-
     $scope.edit = function(attribute) {
       $scope.editing[attribute] = true;
       _focus('edit-board-' + attribute);
