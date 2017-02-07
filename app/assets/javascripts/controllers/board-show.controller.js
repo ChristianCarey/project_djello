@@ -1,9 +1,7 @@
 
-Djello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board', 'boardService', '$timeout',
-  function($scope, $stateParams, $state, board, boardService, $timeout) {
+Djello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board', 'boardService', '$timeout', 'Auth',
+  function($scope, $stateParams, $state, board, boardService, $timeout, Auth) {
   
-     $scope.board = board;
-
     var _resetEditing = function() {
       $scope.editing = {
         title: false,
@@ -44,6 +42,14 @@ Djello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board',
         }
       }
     })
+
+
+    Auth.currentUser()
+      .then(function(user) {
+        $scope.currentUser = user;
+      });
+
+    $scope.board = board;
 
     _resetEditing();
   }])

@@ -12,3 +12,30 @@
   padding-right: 0!important;
   min-height: 100vh;
 }
+
+#member-select {
+  border: 1px solid #ccc;
+  // border-top: 0;
+  padding: 0;
+  position: absolute;
+  background: white;
+  width: 100%;
+  top: 56px;
+
+  li {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+    height: 24px;
+    margin: 0;
+
+    &:hover {
+      background: #ddd;
+    }
+  }
+}
+
+#new-member-form {
+  position: relative;
+}

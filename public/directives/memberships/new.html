@@ -1,0 +1,46 @@
+<div ng-controller="MembershipCreateCtrl">
+  <p ng-hide="memberships.length">
+    This {{ joinableType | lowercase }} has no members.
+  </p>
+  <p ng-show="memberships.length">
+    <button class="btn btn-primary" ng-click="toggleShowingMemberships()">
+      {{ showingMemberships ?  'Hide Members' : 'Show Members (' + memberships.length + ')' }}
+    </button>
+  </p>
+  <div ng-show="memberships.length && showingMemberships">  
+    Members:
+    <ul>
+      <li ng-repeat="membership in memberships">
+        {{ membership.user.email }}
+      </li>
+    </ul>
+  </div>
+  <form id="new-member-form" name="createMembershipForm" ng-submit="createMembership()">
+    <div class="form-group">
+      <label for="email">
+        Add a member to this {{ joinableType | lowercase }}
+      </label>
+      <input ng-focus="startSelectingMember()" 
+             ng-blur="stopSelectingMember()" 
+             type="text" 
+             name="email" 
+             ng-model="memberEmail" 
+             class="form-control" 
+             autocomplete="off">
+    </div>
+    <ul id="member-select" ng-show="selectingMember">
+      <li ng-repeat="user in users | filter : memberEmail" 
+          ng-if="user.id !== currentUser.id" 
+          ng-click="selectMember(user.email, user.id)">
+        {{ user.email }}
+      </li>
+    </ul>
+    <p ng-if="joinableType === 'Board'">
+      Members can view all lists cards. They can create lists and cards, which they can then edit and destroy.
+    </p>
+    <p ng-if="joinableType === 'Card'">
+      Members assigned to this card are responsible for its completion.
+    </p>
+    <input type="submit" class="btn btn-success" value="Add to {{ joinableType | lowercase }}">
+  </form>
+</div>

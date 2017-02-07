@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170206211804) do
+ActiveRecord::Schema.define(version: 20170207175051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,16 +25,6 @@ ActiveRecord::Schema.define(version: 20170206211804) do
     t.index ["user_id"], name: "index_activities_on_user_id", using: :btree
   end
 
-  create_table "board_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "board_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["board_id"], name: "index_board_users_on_board_id", using: :btree
-    t.index ["user_id", "board_id"], name: "index_board_users_on_user_id_and_board_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_board_users_on_user_id", using: :btree
-  end
-
   create_table "boards", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -43,16 +33,6 @@ ActiveRecord::Schema.define(version: 20170206211804) do
     t.datetime "updated_at",  null: false
     t.integer  "position"
     t.index ["user_id"], name: "index_boards_on_user_id", using: :btree
-  end
-
-  create_table "card_users", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "card_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["card_id"], name: "index_card_users_on_card_id", using: :btree
-    t.index ["user_id", "card_id"], name: "index_card_users_on_user_id_and_card_id", unique: true, using: :btree
-    t.index ["user_id"], name: "index_card_users_on_user_id", using: :btree
   end
 
   create_table "cards", force: :cascade do |t|
@@ -81,6 +61,16 @@ ActiveRecord::Schema.define(version: 20170206211804) do
     t.index ["user_id"], name: "index_lists_on_user_id", using: :btree
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "joinable_type"
+    t.integer  "joinable_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable_type_and_joinable_id", using: :btree
+    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "first_name",                          null: false
     t.string   "last_name"
@@ -102,12 +92,9 @@ ActiveRecord::Schema.define(version: 20170206211804) do
 
   add_foreign_key "activities", "cards"
   add_foreign_key "activities", "users"
-  add_foreign_key "board_users", "boards"
-  add_foreign_key "board_users", "users"
   add_foreign_key "boards", "users"
-  add_foreign_key "card_users", "cards"
-  add_foreign_key "card_users", "users"
   add_foreign_key "cards", "users"
   add_foreign_key "lists", "boards"
   add_foreign_key "lists", "users"
+  add_foreign_key "memberships", "users"
 end

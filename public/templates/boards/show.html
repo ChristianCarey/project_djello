@@ -1,7 +1,5 @@
-<div>
-  <div class="row">
-    <div class="col-xs-9 board-show">
-    <div class="board-header">
+<div class="col-xs-9 board-show no-padding">
+  <div class="board-header">
     <h3>
       <span ng-click="edit('title')" ng-hide="editing.title">
         {{ board.title }}
@@ -14,10 +12,8 @@
       </span>
     </h3> 
   </div>
-      <list-index id="list-index" board="board"></list-index>
-    </div>
-    <div class="col-xs-3" id='board-menu'>
-      <board-menu board="board" ng-controller="BoardMenuCtrl"></board-menu>
-    </div>
-  </div>
+  <list-index id="list-index" board="board"></list-index>
+</div>
+<div class="col-xs-3" id='board-menu'>
+  <board-menu board="board" ng-controller="BoardMenuCtrl"></board-menu>
 </div>

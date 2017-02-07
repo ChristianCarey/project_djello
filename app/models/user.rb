@@ -4,11 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :board_users, dependent: :destroy
-  has_many :boards, through: :board_users
+  has_many :memberships, dependent: :destroy
+  
+  has_many :boards, through: :memberships, 
+                    source: :joinable, 
+                    source_type: 'Board'
 
-  has_many :owned_boards, class_name: "Board", dependent: :nullify
+  has_many :cards, through: :memberships, 
+                   source: :joinable, 
+                   source_type: 'Card'
 
-  has_many :card_users, dependent: :destroy
-  has_many :shared_cards, through: :card_users, source: :card
+  has_many :owned_boards, class_name: 'Board', 
+                          dependent: :nullify
 end

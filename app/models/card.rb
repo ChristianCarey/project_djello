@@ -1,4 +1,6 @@
 class Card < ApplicationRecord
+  include Joinable
+  
   belongs_to :user
   belongs_to :list
   after_save :reposition

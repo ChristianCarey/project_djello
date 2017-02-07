@@ -1,6 +1,9 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+* {
+  box-sizing: border-box;
+}
 
 #dropdown-form {
   padding: 14px;
@@ -19,4 +22,16 @@
   color: #CF3131;
   float: right!important;
   cursor: pointer;
+}
+
+.no-padding {
+  padding: 0!important;
+}
+
+.no-margin {
+  margin: 0!important;
+}
+
+.wide {
+  width: 100%!important;
 }

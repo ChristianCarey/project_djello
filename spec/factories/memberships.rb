@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :board_user do
+  factory :membership do
     user nil
-    board nil
+    joinable nil
   end
 end
