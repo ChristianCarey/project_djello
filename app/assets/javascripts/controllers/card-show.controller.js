@@ -33,7 +33,6 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
     }
 
     $scope.handleDrop = function(staticCardId, droppedCardId, originalListId) {
-      console.log(droppedCardId)
       var staticCard;
       var droppedCard = {
         id: droppedCardId,

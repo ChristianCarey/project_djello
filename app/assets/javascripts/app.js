@@ -13,19 +13,6 @@ Djello.config(
       .common['X-CSRF-Token'] = token;
   }])
 
-// // Devise config
-// Djello.config(
-//   ['AuthProvider',
-
-//   function(AuthProvider) {
-//     AuthProvider.loginPath('/users/sign_in.json');
-//     AuthProvider.loginMethod('POST');
-//     AuthProvider.resourceName('users');
-//   }
-
-// ]);
-
-// Restangular config
 Djello.config(
   ['RestangularProvider',
 
@@ -55,16 +42,6 @@ Djello.config(
           }
         }
       })
-      // .state('new',{
-      //   url: "boards/new",
-      //   params: {lastId: ""},
-      //   views: {
-      //     '': {
-      //       templateUrl: "/templates/boards/new.html", 
-      //       controller: "BoardCreateCtrl"
-      //     }
-      //   }
-      //   })
       .state('showBoard', {
         parent: 'main',
         url: '/boards/:id',
@@ -78,10 +55,6 @@ Djello.config(
             templateUrl: '/templates/boards/show.html',
             controller: 'BoardShowCtrl',
           }
-          // 'activity-feed@boards' : {
-          //   templateUrl: '/templates/boards/activity-feed.html',
-          //   controller: 'ListIndexCtrl'
-          // }
         }
       })
   }])

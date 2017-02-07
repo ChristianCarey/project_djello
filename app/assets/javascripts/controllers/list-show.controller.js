@@ -35,9 +35,7 @@ Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout',
         }
       }
       if (card.list.id === $scope.list.id) { 
-        console.log($scope.list.cards)
         angular.copy(card.list.cards, $scope.list.cards)
-        console.log($scope.list.cards)
       }
     })
 

@@ -13,7 +13,9 @@ json.lists @board.lists do |list|
     json.description card.description
     json.position card.position
     json.complete card.complete
-    json.listTitle list.title
-    json.listId list.id
+    json.list do 
+      json.id list.id
+      json.title list.title
+    end
   end
 end

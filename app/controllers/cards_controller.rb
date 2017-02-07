@@ -23,7 +23,7 @@ class CardsController < ApplicationController
   def update
     @card = Card.find_by(id: params[:id])
     if @card.update(card_params)
-      render json: @card.to_json(include: { list: { include: :cards}})
+      render json: @card.to_json(include: { list: { include: { cards: { include: :list }}}})
     else 
       render json: @card.errors.full_messages, status: 422
     end
