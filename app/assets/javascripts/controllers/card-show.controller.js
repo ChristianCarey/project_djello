@@ -32,6 +32,18 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
       _focus('edit-card-' + attribute);
     }
 
+
+    $scope.confirmDestroy = function() {
+      $uibModal.open({
+        templateUrl: '/directives/shared/confirm-delete.html',
+        scope: $scope
+      })
+    }
+
+    $scope.destroy = function(){
+      cardService.destroy($scope.card)
+    }
+
     $scope.handleDrop = function(staticCardId, droppedCardId, originalListId) {
       var staticCard;
       var droppedCard = {
@@ -52,6 +64,7 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
           position: -1
         }
       }
+
       droppedCard.new_position = staticCard.position + 1;
       cardService.update(droppedCard)
         .then(function(card) {

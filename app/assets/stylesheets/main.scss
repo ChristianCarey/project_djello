@@ -1,0 +1,22 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+
+#dropdown-form {
+  padding: 14px;
+}
+
+.navbar {
+  margin-bottom: 0!important;
+}
+
+.modal-visable {
+  padding: 14px;
+}
+
+.delete-link {
+  font-size: 18px;
+  color: #CF3131;
+  float: right!important;
+  cursor: pointer;
+}

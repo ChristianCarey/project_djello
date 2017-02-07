@@ -7,8 +7,11 @@
       </span>
       <span ng-show="editing.title">
         <form ng-submit="updateList()">
-          <input id="edit-list-title" type="text" ng-model="list.title" class="form-control" ng-blur="updateList()">
+          <input id="edit-list-title-{{list.id}}" type="text" ng-model="list.title" class="form-control" ng-blur="updateList()">
         </form>
+      </span>
+      <span ng-click="confirmDestroy()" class="delete-link" ng-hide="editing.title">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
       </span>
     </h5>
   </div>
@@ -27,4 +30,6 @@
     <input type="submit" class="btn btn-success" value="Create">
     </form>
   </div>
+</div>
+<div class="list-spacer">
 </div>

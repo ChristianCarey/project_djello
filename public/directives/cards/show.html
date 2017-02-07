@@ -1,4 +1,4 @@
-<div class="card">
+<div class="modal-visable">
   <div class="card-header">
     <h3>
       <span ng-click="edit('title')" ng-hide="editing.title">
@@ -7,6 +7,9 @@
       </span>
       <span ng-show="editing.title">
         <input id="edit-card-title" type="text" ng-model="card.title" class="form-control" ng-blur="updateCard()">
+      </span>
+      <span ng-click="confirmDestroy()" class="delete-link" ng-hide="editing.title">
+        <i class="fa fa-trash-o" aria-hidden="true"></i>
       </span>
     </h3>
     <p>In list {{ card.list.title }}</p>

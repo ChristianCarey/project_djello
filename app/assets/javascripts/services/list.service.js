@@ -18,9 +18,17 @@ Djello.service('listService', ['Restangular', '$rootScope',
       return Restangular.one('lists', id).get()
     }
 
+    var destroy = function(list) {
+      Restangular.one('lists', list.id).remove()
+        .then(function(list) {
+          $rootScope.$broadcast('destroyList', list)
+        })
+    }
+
     return {
       create: create,
       update: update,
-      find: find
+      find: find,
+      destroy: destroy
     }
   }]);

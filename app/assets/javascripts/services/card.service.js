@@ -1,5 +1,5 @@
-Djello.factory('cardService', ['Restangular', '$rootScope', '$q',
-  function(Restangular, $rootScope, $q) {
+Djello.factory('cardService', ['Restangular', '$rootScope',
+  function(Restangular, $rootScope) {
 
     var create = function(params) {
       return Restangular.all('cards').post(params)
@@ -13,8 +13,16 @@ Djello.factory('cardService', ['Restangular', '$rootScope', '$q',
       return card.put()
     }
 
+    var destroy = function(card) {
+      Restangular.one('cards', card.id).remove()
+        .then(function(card) {
+          $rootScope.$broadcast('destroyCard', card)
+        })
+    }
+
     return {
       create: create,
       update: update,
+      destroy: destroy
     }
   }]);

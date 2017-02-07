@@ -1,3 +1,20 @@
-// Place all the styles related to the Cards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.drag {
+  opacity: 0.5;
+}
+
+.card-small {
+  cursor: pointer;
+}
+
+.over::after {
+  background: #ddd;
+  height: 15px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 4px;
+  content: 'Drop card here';
+}
+
+.shadow-card {
+  height: 14px;
+}

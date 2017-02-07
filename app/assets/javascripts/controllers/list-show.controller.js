@@ -1,5 +1,6 @@
-Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout',
-  function($scope, listService, $timeout) {
+Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout', '$uibModal',
+  function($scope, listService, $timeout, $uibModal) {
+
     var _resetEditing = function() {
       $scope.editing = {
         title: false
@@ -14,12 +15,23 @@ Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout',
 
     $scope.edit = function(attribute) {
       $scope.editing[attribute] = true;
-      _focus('edit-list-' + attribute);
+      _focus('edit-list-' + attribute + '-' + $scope.list.id);
     }
 
     $scope.updateList = function() {
       _resetEditing();
       listService.update($scope.list)
+    }
+
+    $scope.confirmDestroy = function() {
+      $uibModal.open({
+        template: "<confirm-delete></confirm-delete>",
+        scope: $scope
+      })
+    }
+
+    $scope.destroy = function() {
+      listService.destroy($scope.list);
     }
 
     $scope.$on('dropCard', function(e, data) {
@@ -36,6 +48,18 @@ Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout',
       }
       if (card.list.id === $scope.list.id) { 
         angular.copy(card.list.cards, $scope.list.cards)
+      }
+    })
+
+    $scope.$on('destroyCard', function(e, card) {
+      if (card.list_id !== $scope.list.id) { return; }
+      var cards = $scope.list.cards;
+      console.log(cards)
+      for (var i = 0; i < cards.length; i++) {
+        if (cards[i].id === card.id) {
+          cards.splice(i, 1);
+          break;
+        }
       }
     })
 

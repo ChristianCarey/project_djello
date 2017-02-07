@@ -29,6 +29,15 @@ class CardsController < ApplicationController
     end
   end
 
+  def destroy
+    @card = Card.find_by(id: params[:id])
+    if @card.user == current_user && @card.destroy
+      render json: @card
+    else
+      render json: "No card found.", status: 404
+    end
+  end
+
   private
 
   def card_params

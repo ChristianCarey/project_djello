@@ -29,6 +29,15 @@ class ListsController < ApplicationController
     end
   end
 
+  def destroy
+    @list = List.find_by(id: params[:id])
+    if @list.user == current_user && @list.destroy
+      render json: @list
+    else
+      render json: "No list found.", status: 404
+    end
+  end
+
   private
 
   def list_params

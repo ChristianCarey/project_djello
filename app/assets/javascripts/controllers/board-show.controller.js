@@ -35,5 +35,15 @@ Djello.controller('BoardShowCtrl', ['$scope', '$stateParams', '$state', 'board',
       $scope.board.lists.push(list);
     })
 
+    $scope.$on('destroyList', function(e, list) {
+      for (var i = 0; i < $scope.board.lists.length; i++) {
+        var other_list = $scope.board.lists[i];
+        if (other_list.id === list.id) {
+          $scope.board.lists.splice(i, 1);
+          break
+        }
+      }
+    })
+
     _resetEditing();
   }])
