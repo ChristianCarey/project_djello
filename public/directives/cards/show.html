@@ -30,12 +30,20 @@
     <p ng-show="card.complete" class="complete-label">
       Completed
       <br>
-      <a ng-click="toggleComplete()">Mark as incomplete</a>
+      <a ng-if="currentUser.id === board.user_id ||
+                  currentUser.id === card.user_id"  
+          ng-click="toggleComplete()">
+          Mark as incomplete
+      </a>
     </p>
     <p ng-hide="card.complete" class="incomplete-label">
       Incomplete
       <br>
-      <a ng-click="toggleComplete()">Mark as complete</a>
+      <a ng-if="currentUser.id === board.user_id ||
+                  currentUser.id === card.user_id"  
+          ng-click="toggleComplete()">
+          Mark as complete
+      </a>
     </p>
     <p>In list {{ card.list.title }}</p>
   </div>
@@ -56,11 +64,6 @@
                   ng-model="card.description">
       </textarea>
     </p>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> Completed
-      </label>
-    </div>
   </div>
   <hr>
   <p>

@@ -37,7 +37,7 @@
              autocomplete="off">
     </div>
     <ul class="member-select" ng-show="selectingMember">
-      <li ng-repeat="user in nonMemberUsers | filter : memberEmail" 
+      <li ng-repeat="user in nonMemberUsers | filter : {email: memberEmail} " 
           ng-if="user.id !== currentUser.id" 
           ng-click="selectMember(user.email, user.id)"
           ng-mouseover="lockSelectingMember()"

@@ -17,6 +17,9 @@
             <li ng-repeat="board in boards">
               <a ui-sref="showBoard({id: board.id})">{{ board.title }}</a>
             </li>
+            <li ng-if="!boards.length">
+              <a>No boards</a>
+            </li>
           </ul>
         </li>
       </ul>
