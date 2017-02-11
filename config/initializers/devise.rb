@@ -1,6 +1,9 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+
+  config.secret_key = 'b787ed47258b39f45d048c31b4c838b6385ada04eb39f5b195d44ed56a826f47c9a9e64244b0ba8839ace76c40a54bcfe66070ddb397d721cbad6c761d8ea849'
+
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -12,7 +15,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'https://djello-tasks.herokuapp.com/'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
