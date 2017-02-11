@@ -40,8 +40,13 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
       })
     }
 
-    $scope.destroy = function(){
+    $scope.destroy = function() {
       cardService.destroy($scope.card)
+    }
+
+    $scope.toggleComplete = function() {
+      $scope.card.complete = !$scope.card.complete;
+      $scope.updateCard();
     }
 
     $scope.handleDrop = function(staticCardId, droppedCardId, originalListId) {

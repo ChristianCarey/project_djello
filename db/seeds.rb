@@ -64,12 +64,13 @@ puts "adding cards to lists"
 List.all.each do |list| 
 
   4.times do |n|
-    list.cards.create(
+    card = list.cards.create(
       user_id: user.id,
       title: Faker::StarWars.vehicle,
       description: Faker::ChuckNorris.fact,
       position: n
     )
+    card.members << user
   end
 end
 
