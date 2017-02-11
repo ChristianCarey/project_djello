@@ -14,6 +14,7 @@ class CardsController < ApplicationController
     @card = list.cards.build(card_params) 
     @card.user = current_user
     if @card.save
+      @card.members << current_user
       render json: @card.to_json(include: :list)
     else
       render json: @card.errors.full_messages, status: 422
