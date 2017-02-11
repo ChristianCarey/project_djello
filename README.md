@@ -36,7 +36,7 @@ Lists represent one big chunk of the current project. Create a list, and you wil
 ### Cards
 Each card is a small task that needs to be completed. Clicking on a card shows a detailed view. This view shows the card's description, a list of its members, and options to edit the card, add members, or mark the card as completed.
 
-Card can be reordered by clicking and dragging. You can also move cards to other lists on the same board.
+Cards can be reordered by clicking and dragging. You can also move cards to other lists on the same board.
 
 ### Members
 Boards and cards have members. Members are other users who have special permissions. Members of a board can see all of its lists and cards, and can add their own lists and cards. If a member creates a card, he or she is automatically one of that card's members.
