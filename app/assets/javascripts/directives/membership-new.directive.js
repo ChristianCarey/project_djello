@@ -4,7 +4,8 @@ Djello.directive('membershipNew', function() {
     resrict: 'E',
     scope: {
       joinableType: '=',
-      joinableId: '='
+      joinableId: '=',
+      joinableOwnerId: '='
     }
   }
 })

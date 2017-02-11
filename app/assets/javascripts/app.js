@@ -48,6 +48,9 @@ Djello.config(
         resolve: {
           "board": ["boardService", "$stateParams", function(boardService, $stateParams) {
             return boardService.find($stateParams.id)
+          }],
+          'currentUser' : ['Auth', function(Auth) {
+            return Auth.currentUser()
           }]
         },
         views: {

@@ -5,6 +5,19 @@
   box-sizing: border-box;
 }
 
+.alert-notice {
+  @extend .alert-success;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
 #dropdown-form {
   padding: 14px;
 }
@@ -24,6 +37,11 @@
   cursor: pointer;
 }
 
+.delete-link-small {
+  @extend .delete-link;
+  font-size: 12px;
+}
+
 .no-padding {
   padding: 0!important;
 }
@@ -34,4 +52,8 @@
 
 .wide {
   width: 100%!important;
+}
+
+.block {
+  display: block;
 }

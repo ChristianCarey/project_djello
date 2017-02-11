@@ -1,16 +1,28 @@
-<div class="list panel panel-default" ng-repeat="list in board.lists" ng-controller="ListShowCtrl">
+<div class="list panel panel-default" 
+     ng-repeat="list in board.lists" 
+     ng-controller="ListShowCtrl">
   <div class="panel-heading">
     <h5>
       <span ng-click="edit('title')" ng-hide="editing.title">
         {{ list.title }}
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <i ng-if="userAuthorized" 
+           class="fa fa-pencil-square-o" 
+           aria-hidden="true"></i>
       </span>
       <span ng-show="editing.title">
         <form ng-submit="updateList()">
-          <input id="edit-list-title-{{list.id}}" type="text" ng-model="list.title" class="form-control" ng-blur="updateList()">
+          <input id="edit-list-title-{{list.id}}" 
+                 type="text" 
+                 ng-model="list.title" 
+                 class="form-control" 
+                 ng-blur="updateList()">
         </form>
       </span>
-      <span ng-click="confirmDestroy()" class="delete-link" ng-hide="editing.title">
+      <span ng-if="currentUser.id === board.user_id ||
+                   currentUser.id === list.user_id" 
+            ng-click="confirmDestroy()" 
+            ng-hide="editing.title"
+            class="delete-link">
         <i class="fa fa-trash-o" aria-hidden="true"></i>
       </span>
     </h5>
@@ -25,7 +37,10 @@
   <div class="panel-body">
     <form name="newListForm" ng-submit="createList()">
       <div class="form-group">
-        <input ng-model="newList.title" type="text" name="title" class="form-control new-list-input" placeholder="Add a list...">
+        <input ng-model="newList.title" 
+               type="text" 
+               name="title" 
+               class="form-control new-list-input"placeholder="Add a list...">
       </div>
     <input type="submit" class="btn btn-success" value="Create">
     </form>

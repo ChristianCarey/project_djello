@@ -14,6 +14,15 @@ class MembershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @membership = Membership.find_by(id: params[:id])
+    if @membership.joinable.user === current_user && @membership.destroy
+      render json: @membership.to_json(include: :user)
+    else
+      render json: "No membership found", status: 404
+    end
+  end
+
   private
 
   def membership_params

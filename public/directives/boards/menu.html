@@ -1,10 +1,15 @@
 <h2>Menu</h2>
-<button class="btn btn-danger" ng-click="confirmDestroy()">
+<button class="btn btn-danger" 
+        ng-click="confirmDestroy()"
+        ng-if="board.user_id === currentUser.id">
   Delete Board
 </button>
 <hr>
 <p>
-  <membership-new joinable-id="board.id" joinable-type="'Board'"></membership-new>
+  <membership-new joinable-id="board.id" 
+                  joinable-type="'Board'"
+                  joinable-owner-id="board.user_id">
+  </membership-new>
 </p>
 <hr>
 <p>

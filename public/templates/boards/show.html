@@ -3,16 +3,32 @@
     <h3>
       <span ng-click="edit('title')" ng-hide="editing.title">
         {{ board.title }}
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <i ng-if="userOwned" 
+           class="fa fa-pencil-square-o" 
+           aria-hidden="true">
+        </i>
       </span>
       <span ng-show="editing.title">
         <form ng-submit="updateBoard()">
-          <input id="edit-board-title" type="text" ng-model="board.title" class="form-control" ng-blur="updateBoard()">
+          <input id="edit-board-title" 
+                 type="text" 
+                 ng-model="board.title" 
+                 class="form-control" 
+                 ng-blur="updateBoard()">
         </form>
       </span>
     </h3> 
+    <p ng-if="board.user_id === currentUser.id">
+      You created this board.
+    </p>
+    <p ng-if="!(board.user_id === currentUser.id)">
+      Created by {{ board.user.first_name }} {{ board.user.last_name }}
+    </p>
   </div>
-  <list-index id="list-index" board="board"></list-index>
+  <list-index id="list-index" 
+              board="board"
+              currentUserId="currentUser.id">                
+  </list-index>
 </div>
 <div class="col-xs-3" id='board-menu'>
   <board-menu board="board" ng-controller="BoardMenuCtrl"></board-menu>

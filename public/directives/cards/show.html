@@ -2,27 +2,56 @@
   <div class="card-header">
     <h3>
       <span ng-click="edit('title')" ng-hide="editing.title">
-        {{ card.title }} 
-        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        {{ card.title }}
+        <i ng-if="currentUser.id === board.user_id ||
+                  currentUser.id === card.user_id"
+           class="fa fa-pencil-square-o" 
+           aria-hidden="true">
+        </i>
       </span>
       <span ng-show="editing.title">
-        <input id="edit-card-title" type="text" ng-model="card.title" class="form-control" ng-blur="updateCard()">
+        <input id="edit-card-title"
+               type="text"
+               ng-model="card.title"
+               class="form-control"
+               ng-blur="updateCard()">
       </span>
-      <span ng-click="confirmDestroy()" class="delete-link" ng-hide="editing.title">
-        <i class="fa fa-trash-o" aria-hidden="true"></i>
+      <span ng-click="confirmDestroy()"
+            ng-hide="editing.title"
+            class="delete-link"
+            ng-if="card.user_id === currentUser.id || board.user_id === currentUser.id">
+        <i ng-if="currentUser.id === board.user_id ||
+                  currentUser.id === card.user_id" 
+          class="fa fa-trash-o" 
+          aria-hidden="true">
+        </i>
       </span>
     </h3>
     <p>In list {{ card.list.title }}</p>
   </div>
   <div class="card-description">
     <p>
-      <span ng-click="edit('description')" ng-hide="editing.description">{{card.description}} <i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
-        <textarea id="edit-card-description" class="form-control" ng-show="editing.description" ng-blur="updateCard()" ng-model="card.description">
+      <span ng-click="edit('description')" ng-hide="editing.description">
+        {{card.description || 'No description.'}}
+        <i ng-if="currentUser.id === board.user_id ||
+                  currentUser.id === card.user_id" 
+           class="fa fa-pencil-square-o" 
+           aria-hidden="true">
+        </i>
+      </span>
+        <textarea id="edit-card-description"
+                  class="form-control"
+                  ng-show="editing.description"
+                  ng-blur="updateCard()"
+                  ng-model="card.description">
       </textarea>
     </p>
   </div>
   <hr>
   <p>
-    <membership-new joinable-type="'Card'" joinable-id="card.id"></membership-new>
+    <membership-new joinable-type="'Card'"
+                    joinable-id="card.id"
+                    joinable-owner-id="card.user_id">
+    </membership-new>
   </p>
 </div>

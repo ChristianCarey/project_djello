@@ -14,8 +14,10 @@ Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout', '$uibMod
     }
 
     $scope.edit = function(attribute) {
-      $scope.editing[attribute] = true;
-      _focus('edit-list-' + attribute + '-' + $scope.list.id);
+      if ($scope.userAuthorized) {
+        $scope.editing[attribute] = true;
+        _focus('edit-list-' + attribute + '-' + $scope.list.id);
+      }
     }
 
     $scope.updateList = function() {
@@ -62,6 +64,9 @@ Djello.controller('ListShowCtrl', ['$scope', 'listService', '$timeout', '$uibMod
         }
       }
     })
+
+    $scope.userAuthorized = $scope.currentUser.id === $scope.list.user_id || 
+                            $scope.currentUser.id === $scope.board.user_id;
 
     _resetEditing();
   }]);

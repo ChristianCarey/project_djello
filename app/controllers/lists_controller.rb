@@ -31,7 +31,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list = List.find_by(id: params[:id])
-    if @list.user == current_user && @list.destroy
+    if @list.user == current_user || list.board.user == current_user && @list.destroy
       render json: @list
     else
       render json: "No list found.", status: 404
