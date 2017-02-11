@@ -46,21 +46,21 @@ puts "adding example list to boards"
 
 list = board.lists.create(
   title: "A list of cards",
-  user_id: user.user_id
+  user_id: user.id
 )
 
 puts "adding example cards"
 
 list.cards.create(
   title: "This is card - click to see details",
-  description: "Cards represent tasks that need to be completed. You can add members below to assign more users to a task.",
+  description: "Cards represent tasks that need to be completed.\n As the creator of this card, only you and the creator of this board can edit or delete it.",
   user_id: user.id,
   position: 0
 )
 
 member_card = list.cards.create(
   title: "This card has another member.",
-  description: "You and the other member can mark this card as complete.",
+  description: "Any member can mark a card as completed.\n Find another user by email below to add them as a member.",
   user_id: user.id,
   position: 1
 )
@@ -69,11 +69,18 @@ other_user.cards << member_card
 
 list.cards.create(
   title: "This card is complete.",
-  description: "If you no longer need this card on your list, delete by clicking the trash can in the upper-right corner.",
+  description: "If you no longer need this card on your list, delete it by clicking the trash can in the upper-right corner.",
   complete: true,
   user_id: user.id,
   position: 2
   )
+
+list.cards.create(
+  title: "Try moving this card.",
+  description: "Cards can be repositioned by clicking and dragging them. You can even make another list and move cards between lists.",
+  user_id: user.id,
+  position: 3
+)
 
 Card.all.each do |card|
   user.cards << card

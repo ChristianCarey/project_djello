@@ -2,6 +2,9 @@
   <h2>Log in</h2>
 
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <p>
+      To see a demo, log in as user@example.com with the password "password".
+    </p>
     <div class="form-group">
       <%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true, class: 'form-control' %>
