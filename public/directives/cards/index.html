@@ -1,7 +1,7 @@
 <div class="card-index"> 
   <div droppable class="shadow-card" ng-controller="CardShowCtrl">
   </div>
-  <div data-list-id="{{ card.list.id }}" id="{{ 'card' + card.id }}" droppable draggable ng-controller="CardShowCtrl" ng-repeat="card in list.cards | orderBy : 'position'" ng-click="showCard()" class="card-small">
+  <div data-list-id="{{ card.list.id }}" id="{{ 'card' + card.id }}" droppable draggable ng-controller="CardShowCtrl" ng-repeat="card in list.cards | orderBy : 'position'" ng-click="showCard()" class="card-small {{card.complete ? 'card-small-complete' : ''}}">
     <div class="well">
       <p>{{ card.title }}</p>
     </div>

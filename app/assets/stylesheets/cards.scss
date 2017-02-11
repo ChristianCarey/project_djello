@@ -6,6 +6,12 @@
   cursor: pointer;
 }
 
+.card-small-complete {
+  .well {
+    background: #BAE8BA;
+  }
+}
+
 .over::after {
   background: #ddd;
   height: 15px;
