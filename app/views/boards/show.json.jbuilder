@@ -21,6 +21,11 @@ json.lists @board.lists do |list|
     json.position card.position
     json.complete card.complete
     json.user_id card.user_id
+
+    json.members card.members do |member|
+      json.id member.id
+    end
+    
     json.list do 
       json.id list.id
       json.title list.title

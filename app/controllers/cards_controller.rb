@@ -3,7 +3,7 @@ class CardsController < ApplicationController
   def show 
     @card = Card.find_by(id: params[:id])
     if @card
-      render json: @card.to_json(include: { list: { include: :cards}})
+      render json: @card.to_json(include: [{ list: { include: :cards}}, :members])
     else
       render Json: "No card found", status: 404
     end

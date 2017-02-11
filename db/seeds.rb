@@ -6,16 +6,16 @@ User.destroy_all
 puts "Creating users..."
 
 user = User.create(
-  first_name: 'User1',
-  last_name:  'Userman',
-  email:      'user1@mail.com',
+  first_name: 'Example',
+  last_name:  'User',
+  email:      'user@example.com',
   password:   'password'
 )
 
-User.create(
-  first_name: 'User2',
-  last_name:  'Userman',
-  email:      'user2@mail.com',
+other_user = User.create(
+  first_name: 'Other',
+  last_name:  'User',
+  email:      'otheruser@example.com',
   password:   'password'
 )
 
@@ -29,49 +29,54 @@ User.create(
   )
 end
 
-puts "User created, log in with user@mail.com, and password: password"
-puts "Creating Boards"
+puts "User created, log in with user@example.com, and password: password"
+puts "Creating example board"
 
-5.times do
-  board = Board.create(
-    title: Faker::StarWars.planet,
-    description: Faker::StarWars.quote,
-    user_id: User.first.id
-  )
-  user.boards << board
-end
+board = Board.create(
+  title: "This is a board - Add some lists", 
+  user_id: user.id
+)
+
+user.boards << board
+other_user.boards << board
 
 puts "5 boards created"
 
-puts "adding lists to boards" 
+puts "adding example list to boards" 
 
-Board.all.each do |board|
+list = board.lists.create(
+  title: "A list of cards",
+  user_id: user.user_id
+)
 
-  4.times do |n|
-    board.lists.create(
-      user_id: user.id,
-      title: Faker::Pokemon.location,
-      description: Faker::ChuckNorris.fact,
-      position: n
-    )
-  end
-end
+puts "adding example cards"
 
-puts "lists added"
+list.cards.create(
+  title: "This is card - click to see details",
+  description: "Cards represent tasks that need to be completed. You can add members below to assign more users to a task.",
+  user_id: user.id,
+  position: 0
+)
 
-puts "adding cards to lists"
+member_card = list.cards.create(
+  title: "This card has another member.",
+  description: "You and the other member can mark this card as complete.",
+  user_id: user.id,
+  position: 1
+)
 
-List.all.each do |list| 
+other_user.cards << member_card
 
-  4.times do |n|
-    card = list.cards.create(
-      user_id: user.id,
-      title: Faker::StarWars.vehicle,
-      description: Faker::ChuckNorris.fact,
-      position: n
-    )
-    card.members << user
-  end
+list.cards.create(
+  title: "This card is complete.",
+  description: "If you no longer need this card on your list, delete by clicking the trash can in the upper-right corner.",
+  complete: true,
+  user_id: user.id,
+  position: 2
+  )
+
+Card.all.each do |card|
+  user.cards << card
 end
 
 puts "All done!"

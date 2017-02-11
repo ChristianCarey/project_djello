@@ -15,6 +15,17 @@ Djello.controller('CardShowCtrl', ['$scope', '$uibModal', 'cardService', '$timeo
       };
     }
 
+    $scope.userIsMember = function() {
+      if (!$scope.card) { return false;}
+      for (var i = 0; i < $scope.card.members.length; i++) {
+        var memberId = $scope.card.members[i].id;
+        if (memberId === $scope.currentUser.id) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     $scope.showCard = function() {
       $uibModal.open({
         template: "<card-show></card-show>",

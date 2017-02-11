@@ -30,8 +30,7 @@
     <p ng-show="card.complete" class="complete-label">
       Completed
       <br>
-      <a ng-if="currentUser.id === board.user_id ||
-                  currentUser.id === card.user_id"  
+      <a ng-if="userIsMember()"  
           ng-click="toggleComplete()">
           Mark as incomplete
       </a>
@@ -39,8 +38,7 @@
     <p ng-hide="card.complete" class="incomplete-label">
       Incomplete
       <br>
-      <a ng-if="currentUser.id === board.user_id ||
-                  currentUser.id === card.user_id"  
+      <a ng-if="userIsMember()"  
           ng-click="toggleComplete()">
           Mark as complete
       </a>
